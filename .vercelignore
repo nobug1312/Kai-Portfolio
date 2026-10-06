@@ -1,0 +1,13 @@
+.git/
+.github/
+.next/
+.vercel/
+node_modules/
+out/
+.env*
+*.tsbuildinfo
+Plan.md
+AGENTS.md
+CLAUDE.md
+cv1.jpg
+cv2.jpg
