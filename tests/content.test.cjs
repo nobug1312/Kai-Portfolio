@@ -34,6 +34,20 @@ function readIconMap(name) {
   }));
 }
 
+test("hero copy stays concise, company-neutral and shared with the terminal", () => {
+  const { site, about, projects } = loadContent();
+
+  assert.ok(site.tagline.trim());
+  assert.ok(site.specialty.trim());
+  assert.ok(site.intro.trim());
+  assert.ok(site.intro.split(/\s+/).length <= 55, "Keep the introduction brief");
+  assert.equal(about, site.intro);
+  for (const project of projects) {
+    assert(!site.intro.includes(project.name), "Do not name projects in the introduction");
+    assert(!site.intro.includes(project.org), "Keep the introduction company-neutral");
+  }
+});
+
 test("site URL resolves local, preview, production and explicit overrides", () => {
   const cases = [
     [{}, "http://localhost:3000"],

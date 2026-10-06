@@ -1,6 +1,7 @@
 export const site = {
   name: "Kai Le",
   role: "Software Engineer",
+  specialty: "System Design / Technical Leadership",
   location: "Ho Chi Minh City, Vietnam",
   email: "lenguyenkhai2611@gmail.com",
   github: "https://github.com/nobug1312",
@@ -12,8 +13,8 @@ export const site = {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000"
   ),
-  tagline: "Full-stack engineering. Reliable systems.",
-  intro: "I build web and .NET applications, from clear interfaces to reliable backend services and data models. My focus is clean architecture, maintainable code and practical solutions to complex problems.",
+  tagline: "Code that reaches beyond the screen.",
+  intro: "I bring clarity to complex engineering problems. I trace issues to their roots, weigh trade-offs carefully, and build with long-term maintainability in mind. I take ownership of technical decisions and help teams build with confidence.",
   description:
     "Kai Le is a software engineer focused on .NET, full-stack development, system architecture and reliable production systems.",
 };
@@ -61,7 +62,7 @@ export const experience: Role[] = [
   },
   {
     when: "Aug 2022 - Sep 2025",
-    title: "Full Stack Developer",
+    title: "Software Engineer",
     org: "PTN Global Corp",
     summary: "Full-stack development of real-time language products for international clients.",
     points: [

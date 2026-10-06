@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { ArrowDown, ArrowUp, Braces, Cloud, Database, GraduationCap, Mail, MapPin, Monitor, PanelsTopLeft, Server, Terminal, Workflow, Wrench } from "lucide-react";
+import { ArrowDown, ArrowUp, Braces, BriefcaseBusiness, Cloud, Database, FolderCode, GraduationCap, Mail, MapPin, Monitor, PanelsTopLeft, Server, Terminal, Workflow, Wrench, type LucideIcon } from "lucide-react";
 import { ProfileTerminal } from "@/components/ProfileTerminal";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SkillIcon } from "@/components/SkillIcon";
@@ -18,11 +18,11 @@ function External({ href, icon, children }: { href: string; icon: "github" | "li
   );
 }
 
-function Section({ id, index, title, children }: { id: string; index: string; title: string; children: ReactNode }) {
+function Section({ id, icon: Icon, title, children }: { id: string; icon: LucideIcon; title: string; children: ReactNode }) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="section-layout reveal">
       <div className="section-heading reveal-item">
-        <span className="section-index" aria-hidden="true">{index}</span>
+        <span className="section-marker" aria-hidden="true"><Icon size={20} strokeWidth={1.6} /></span>
         <h2 id={`${id}-title`}>{title}</h2>
       </div>
       <div className="min-w-0">{children}</div>
@@ -55,7 +55,7 @@ export default function Home() {
           <div className="hero-copy">
             <p className="hero-command"><span aria-hidden="true" className="text-forest">$ </span>whoami</p>
             <h1 id="hero-title" className="hero-name">Kai<span className="text-forest"> Le.</span></h1>
-            <p className="hero-role">{site.role}<span className="hero-specialty">Full stack / .NET</span></p>
+            <p className="hero-role">{site.role}<span className="hero-specialty">{site.specialty}</span></p>
             <p className="hero-summary">{site.tagline}</p>
             <p className="hero-intro">{site.intro}</p>
             <div className="hero-actions">
@@ -79,7 +79,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <Section id="skills" index="01" title="Core Technologies">
+        <Section id="skills" icon={Braces} title="Core Technologies">
           <div className="skills-grid">
             {skills.map((group, index) => {
               const Icon = skillIcons[index];
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
         </Section>
 
-        <Section id="projects" index="02" title="Projects">
+        <Section id="projects" icon={FolderCode} title="Projects">
           <ol className="project-list">
             {projects.map((project, index) => (
               <li key={project.name} className="project-row reveal-item">
@@ -115,7 +115,7 @@ export default function Home() {
           </ol>
         </Section>
 
-        <Section id="experience" index="03" title="Work & education">
+        <Section id="experience" icon={BriefcaseBusiness} title="Work & education">
           <ol className="timeline">
             {experience.map((role) => (
               <li key={role.title} className="timeline-item reveal-item">

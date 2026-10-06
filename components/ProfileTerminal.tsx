@@ -4,7 +4,7 @@ import { ArrowRight, CircleHelp, Terminal } from "lucide-react";
 import { useRef, useState, type FormEvent } from "react";
 import { about, experience, projects, site, skills } from "@/lib/content";
 
-const profile = `${site.name}\n${site.role} · .NET / Full stack\n\nArchitecture / Data / Real-time systems\n${site.location}`;
+const profile = `${site.name}\n${site.role}\n${site.specialty}\n\n${site.location}`;
 const shortcuts = ["whoami", "skills", "projects", "contact"];
 
 function resolveCommand(command: string): string {
