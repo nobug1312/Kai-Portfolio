@@ -49,6 +49,19 @@ test("site URL resolves local, preview, production and explicit overrides", () =
   }
 });
 
+test("MiTek content uses approved public-facing identifiers", () => {
+  const content = loadContent();
+  const project = content.projects.find(item => item.org === "MiTek");
+  const role = content.experience.find(item => item.org === "MiTek");
+
+  assert.ok(project && role, "Keep the MiTek project and experience");
+  assert.equal(project.name, "Structural Fabrication Engine");
+  assert.equal(project.kind, "Senior Software Engineer / Manufacturing Systems");
+  assert.equal(role.team, "Manufacturing Software");
+  assert.ok(project.summary.startsWith("A manufacturing system that"));
+  assert.ok(project.contribution.includes("design, management and manufacturing systems"));
+});
+
 test("every skill has an explicit icon and every mapped logo exists", () => {
   const names = [...loadContent().skills.flatMap(group => group.items)];
   const logos = readIconMap("logos");

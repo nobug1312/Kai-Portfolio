@@ -52,7 +52,7 @@ export const experience: Role[] = [
     when: "Sep 2025 - Present",
     title: "Senior Software Engineer",
     org: "MiTek",
-    team: "Machinery Output / Structure NA / Production Core",
+    team: "Manufacturing Software",
     summary: "Core production systems for North American structural fabrication workflows.",
     points: [
       "Redesigned geometry and conversion algorithms to improve output accuracy and reduce recurring production defects.",
@@ -96,11 +96,11 @@ type Project = {
 
 export const projects: Project[] = [
   {
-    name: "Production Core",
+    name: "Structural Fabrication Engine",
     org: "MiTek",
-    kind: "Senior Software Engineer / Machinery Output",
-    summary: "A Machinery Output component that converts structural building models into machine-ready fabrication data for residential and commercial construction across North America.",
-    contribution: "Owned member conversion, plate generation and bevel/miter calculations. Redesigned legacy geometry algorithms, led investigations across Structure, Management and Production, and improved debugging tools and code quality.",
+    kind: "Senior Software Engineer / Manufacturing Systems",
+    summary: "A manufacturing system that converts structural building models into machine-ready fabrication data for residential and commercial construction across North America.",
+    contribution: "Owned member conversion, plate generation and bevel/miter calculations. Redesigned legacy geometry algorithms, led investigations across design, management and manufacturing systems, and improved debugging tools and code quality.",
     outcome: "Improved manufacturing accuracy, reliability and data consistency, reducing defects and rework risks. Supported scalable fabrication workflows and strengthened team effectiveness through mentoring and knowledge sharing.",
     tech: ["WPF", "C#", "Azure DevOps", "3D computational geometry"],
   },
