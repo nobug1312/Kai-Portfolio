@@ -56,7 +56,7 @@ test("MiTek content uses approved public-facing identifiers", () => {
 
   assert.ok(project && role, "Keep the MiTek project and experience");
   assert.equal(project.name, "Structural Fabrication Engine");
-  assert.equal(project.kind, "Senior Software Engineer / Manufacturing Systems");
+  assert.equal(project.kind, "Senior Software Engineer / Team of 5");
   assert.equal(role.team, "Manufacturing Software");
   assert.ok(project.summary.startsWith("A manufacturing system that"));
   assert.ok(project.contribution.includes("design, management and manufacturing systems"));

@@ -98,7 +98,7 @@ export const projects: Project[] = [
   {
     name: "Structural Fabrication Engine",
     org: "MiTek",
-    kind: "Senior Software Engineer / Manufacturing Systems",
+    kind: "Senior Software Engineer / Team of 5",
     summary: "A manufacturing system that converts structural building models into machine-ready fabrication data for residential and commercial construction across North America.",
     contribution: "Owned member conversion, plate generation and bevel/miter calculations. Redesigned legacy geometry algorithms, led investigations across design, management and manufacturing systems, and improved debugging tools and code quality.",
     outcome: "Improved manufacturing accuracy, reliability and data consistency, reducing defects and rework risks. Supported scalable fabrication workflows and strengthened team effectiveness through mentoring and knowledge sharing.",
