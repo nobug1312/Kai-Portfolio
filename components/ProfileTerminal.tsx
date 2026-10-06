@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, CircleHelp, Terminal } from "lucide-react";
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { about, experience, projects, site, skills } from "@/lib/content";
 
 const profile = `${site.name}\n${site.role}\n${site.specialty}\n\n${site.location}`;
@@ -33,7 +33,61 @@ export function ProfileTerminal() {
   const [input, setInput] = useState("");
   const [lastCommand, setLastCommand] = useState("whoami");
   const [output, setOutput] = useState(profile);
+  const [typingRun, setTypingRun] = useState(0);
   const resultRef = useRef<HTMLDivElement>(null);
+  const outputRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const text = outputRef.current;
+    const result = resultRef.current;
+    if (!text || !result) return;
+
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    function finish() {
+      cancelAnimationFrame(frame);
+      text!.textContent = output;
+      result!.dataset.typing = "false";
+    }
+
+    if (motion.matches || !output) {
+      finish();
+      return;
+    }
+
+    const characters = Array.from(output);
+    const duration = Math.min(4200, Math.max(600, characters.length * 22));
+    const started = performance.now();
+    let renderedCount = -1;
+    text.textContent = "";
+    result.dataset.typing = "true";
+
+    function typeNext(now: number) {
+      const count = Math.min(characters.length, Math.floor((now - started) / duration * characters.length));
+      if (count !== renderedCount) {
+        const followOutput = result!.scrollTop + result!.clientHeight >= result!.scrollHeight - 16;
+        text!.textContent = characters.slice(0, count).join("");
+        renderedCount = count;
+        if (followOutput) result!.scrollTop = result!.scrollHeight;
+      }
+
+      if (count < characters.length) frame = requestAnimationFrame(typeNext);
+      else finish();
+    }
+
+    function updateMotion() {
+      if (motion.matches) finish();
+    }
+
+    frame = requestAnimationFrame(typeNext);
+    motion.addEventListener("change", updateMotion);
+    return () => {
+      cancelAnimationFrame(frame);
+      motion.removeEventListener("change", updateMotion);
+      result.dataset.typing = "false";
+    };
+  }, [output, typingRun]);
 
   function runCommand(command: string) {
     const trimmed = command.trim().slice(0, 64);
@@ -41,12 +95,15 @@ export function ProfileTerminal() {
     if (resultRef.current) resultRef.current.scrollTop = 0;
     setLastCommand(trimmed);
     setOutput(trimmed.toLowerCase() === "clear" ? "" : resolveCommand(trimmed));
+    setTypingRun(previous => previous + 1);
     setInput("");
   }
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!input.trim()) return;
     runCommand(input);
+    event.currentTarget.querySelector<HTMLElement>(":focus")?.blur();
   }
 
   return (
@@ -72,7 +129,8 @@ export function ProfileTerminal() {
       </div>
       <div ref={resultRef} className="terminal-result" role="status" aria-live="polite" aria-atomic="true" tabIndex={0} aria-label="Command output">
         <p className="terminal-command-line"><span className="text-amber" aria-hidden="true">❯ </span>{lastCommand}</p>
-        <pre className="terminal-output">{output}</pre>
+        <pre className="terminal-output" aria-hidden="true"><span ref={outputRef} className="terminal-output-text">{output}</span>{output && <span className="terminal-output-caret" />}</pre>
+        <span className="terminal-accessible-output sr-only">{output || "Output cleared."}</span>
       </div>
       <form onSubmit={submit} className="terminal-form">
         <span aria-hidden="true" className="terminal-prompt">kai<span className="text-sand">:~</span> $</span>
