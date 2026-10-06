@@ -57,9 +57,23 @@ test("MiTek content uses approved public-facing identifiers", () => {
   assert.ok(project && role, "Keep the MiTek project and experience");
   assert.equal(project.name, "Structural Fabrication Engine");
   assert.equal(project.kind, "Senior Software Engineer / Team of 5");
-  assert.equal(role.team, "Manufacturing Software");
   assert.ok(project.summary.startsWith("A manufacturing system that"));
   assert.ok(project.contribution.includes("design, management and manufacturing systems"));
+});
+
+test("PTN projects use software engineer roles and retain their team sizes", () => {
+  const projects = loadContent().projects.filter(project => project.org === "PTN Global Corp");
+  const expected = new Map([
+    ["CaptionConnectLive", "Software Engineer / Team of 12"],
+    ["Bot App Meeting Assistant", "Software Engineer / Team of 5"],
+    ["CCLV3 Desktop App", "Software Engineer / Team of 5"],
+    ["Oncall Marketplace", "Software Engineer / Team of 5"],
+  ]);
+
+  assert.equal(projects.length, expected.size);
+  for (const project of projects) {
+    assert.equal(project.kind, expected.get(project.name), `Unexpected role or team size for ${project.name}`);
+  }
 });
 
 test("every skill has an explicit icon and every mapped logo exists", () => {

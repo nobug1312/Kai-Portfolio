@@ -52,7 +52,6 @@ export const experience: Role[] = [
     when: "Sep 2025 - Present",
     title: "Senior Software Engineer",
     org: "MiTek",
-    team: "Manufacturing Software",
     summary: "Core production systems for North American structural fabrication workflows.",
     points: [
       "Redesigned geometry and conversion algorithms to improve output accuracy and reduce recurring production defects.",
@@ -107,7 +106,7 @@ export const projects: Project[] = [
   {
     name: "CaptionConnectLive",
     org: "PTN Global Corp",
-    kind: "Full stack / Team of 12",
+    kind: "Software Engineer / Team of 12",
     summary: "A live-session platform delivering translated captions to multilingual audiences.",
     contribution: "Designed the UI, database schema and real-time backend services; integrated secure subscription payments.",
     outcome: "Improved the team workflow with the team lead, cutting new-feature deployment time by 40% and reducing configuration-related bugs.",
@@ -116,7 +115,7 @@ export const projects: Project[] = [
   {
     name: "Bot App Meeting Assistant",
     org: "PTN Global Corp",
-    kind: "Full stack / Team of 5",
+    kind: "Software Engineer / Team of 5",
     summary: "A meeting assistant for Webex, Google Meet, Teams and Zoom, with real-time transcription and speaker identification.",
     contribution: "Engineered the transcription and translation pipeline and scalable architecture across meeting platforms.",
     outcome: "Reduced system latency and improved translation response times for cross-language collaboration.",
@@ -125,16 +124,16 @@ export const projects: Project[] = [
   {
     name: "CCLV3 Desktop App",
     org: "PTN Global Corp",
-    kind: "Lead UI / Team of 5",
+    kind: "Software Engineer / Team of 5",
     summary: "An offline desktop app for meeting transcription, translation and session playback.",
-    contribution: "Led cross-platform UI development in WPF and .NET MAUI and integrated offline speech recognition and translation models.",
-    outcome: "Improved memory usage and processing speed for large audio files, with an accessible interface for non-technical users.",
+    contribution: "Led cross-platform UI design and development in WPF and .NET MAUI, defining recording, transcript review and playback workflows. Integrated offline speech and translation models and optimized large-audio processing.",
+    outcome: "Established a cohesive, accessible cross-platform experience for non-technical users, while improving memory efficiency and processing speed for large audio files.",
     tech: ["WPF", ".NET MAUI", "Offline speech recognition"],
   },
   {
     name: "Oncall Marketplace",
     org: "PTN Global Corp",
-    kind: "Full stack / Team of 5",
+    kind: "Software Engineer / Team of 5",
     summary: "A video-localization platform with editable transcripts, multilingual subtitles and export.",
     contribution: "Built responsive editing interfaces, connected microservices through Ocelot, and orchestrated jobs with RabbitMQ and Hangfire.",
     outcome: "Streamlined transcription and translation workflows for content creators and businesses.",
