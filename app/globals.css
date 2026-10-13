@@ -367,13 +367,13 @@
 .desktop-application { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 92px; min-height: 90px; padding: 6px; border: 1px solid transparent; border-radius: 8px; cursor: pointer; text-shadow: 0 1px 5px #0009; font-size: 12px; }
 .desktop-application:hover, .desktop-application:focus-visible { background: #ffffff22; border-color: #ffffff55; }
 .desktop-application img { width: 56px; height: 56px; object-fit: contain; filter: drop-shadow(0 3px 5px #0003); }
-.mac-window { position: absolute; display: flex; flex-direction: column; max-width: calc(100% - 32px); max-height: calc(100% - 148px); overflow: hidden; border: 1px solid var(--mac-glass-border); border-radius: 18px; background: #f6f8facc; color: var(--mac-text); box-shadow: 0 24px 70px #0004, 0 3px 12px #0002, inset 0 1px 0 #fffffff0; backdrop-filter: blur(36px) saturate(170%); transform: translate3d(0, 0, 0); backface-visibility: hidden; }
+.mac-window { position: absolute; display: flex; flex-direction: column; max-width: calc(100% - 32px); max-height: calc(100% - 148px); overflow: hidden; border: 1px solid var(--mac-glass-border); border-radius: 18px; background: #f6f8fa; color: var(--mac-text); box-shadow: 0 24px 70px #0004, 0 3px 12px #0002, inset 0 1px 0 #fffffff0; transform: translate3d(0, 0, 0); backface-visibility: hidden; }
 .mac-window[data-active='false'] { box-shadow: 0 12px 36px #0003; }
 .mac-window:focus-visible { outline: none; }
 .mac-window[data-hiding] { pointer-events: none; }
 .mac-window.is-minimized { display: none; }
 .mac-window.is-maximized { inset: 44px 12px 104px !important; width: auto !important; height: auto !important; max-width: none; max-height: none; }
-.mac-titlebar { display: grid; grid-template-columns: 84px minmax(0, 1fr) 84px; align-items: center; flex-shrink: 0; min-height: 48px; padding: 0 16px; border-bottom: 1px solid #0000000d; background: #ffffff61; cursor: grab; touch-action: none; user-select: none; }
+.mac-titlebar { display: grid; grid-template-columns: 84px minmax(0, 1fr) 84px; align-items: center; flex-shrink: 0; min-height: 48px; padding: 0 16px; border-bottom: 1px solid #0000000d; background: #f6f8fa; cursor: grab; touch-action: none; user-select: none; }
 .mac-window[data-dragging='true'] .mac-titlebar { cursor: grabbing; }
 .mac-window-controls { display: flex; gap: 0; align-items: center; }
 .mac-window-controls button { position: relative; display: grid; place-items: center; flex-shrink: 0; width: 28px; height: 32px; border: 0; border-radius: 4px; background: transparent; color: #000a; cursor: pointer; }
@@ -388,7 +388,7 @@
 .mac-window-title { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mac-window-title > span { overflow: hidden; text-overflow: ellipsis; }
 .mac-window-title > svg { flex-shrink: 0; }
-.mac-window-body { flex: 1; min-height: 0; min-width: 0; overflow: auto; scrollbar-width: thin; overscroll-behavior: contain; background: #ffffff66; }
+.mac-window-body { flex: 1; min-height: 0; min-width: 0; overflow: auto; scrollbar-width: thin; overscroll-behavior: contain; background: #f6f8fa; }
 .mac-dock { position: absolute; z-index: 1000; left: 50%; bottom: 10px; width: max-content; max-width: calc(100% - 16px); transform: translateX(-50%); display: flex; align-items: flex-end; }
 .mac-dock-glass { position: relative; width: max-content; max-width: 100%; padding: 4px 6px; border: 0; border-radius: 20px; background: rgba(238, 242, 251, 0.26); backdrop-filter: blur(16px) saturate(145%); -webkit-backdrop-filter: blur(16px) saturate(145%); box-shadow: none; }
 .mac-dock-glass::before { content: none; }

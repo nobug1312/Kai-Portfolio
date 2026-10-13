@@ -478,7 +478,10 @@ export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> })
 
       {searchOpen && <div className="spotlight-backdrop" onClick={closeSearch}><section ref={spotlightRef} className="mac-spotlight" role="dialog" aria-modal="true" aria-label="Spotlight" onClick={event => event.stopPropagation()} onKeyDown={navigateSearch}><label className="spotlight-input"><Search size={22} aria-hidden="true" /><input autoFocus value={query} onChange={event => setQuery(event.target.value)} placeholder="Spotlight Search" aria-label="Search applications" /><button type="button" aria-label="Close Spotlight" onClick={closeSearch}><X size={18} aria-hidden="true" /></button></label><div className="spotlight-results">{matches.map(app => <button key={app.id} type="button" onClick={() => openApp(app.id)}><Image src={`/desktop/icons/${app.image}.png`} width={30} height={30} alt="" /><span>{app.label}</span><ArrowUpRight size={14} aria-hidden="true" /></button>)}{!matches.length && <p className="spotlight-empty" role="status">No applications found</p>}</div></section></div>}
       </div>
-      {!ready && <WelcomeScreen onComplete={() => setReady(true)} />}
+      {!ready && <WelcomeScreen onComplete={() => {
+        setReady(true);
+        openApp("profile", { toggle: false });
+      }} />}
     </main>
   );
 }
