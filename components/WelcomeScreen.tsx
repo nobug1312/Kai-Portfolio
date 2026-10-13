@@ -7,21 +7,25 @@ export function WelcomeScreen({ onComplete }: { onComplete: () => void }) {
   const [leaving, setLeaving] = useState(false);
   const [quoteTyped, setQuoteTyped] = useState("");
   const [showSpinner, setShowSpinner] = useState(false);
+  const [audioBlocked, setAudioBlocked] = useState(false);
   const screenRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLSpanElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const complete = useEffectEvent(onComplete);
 
   useEffect(() => {
     const audio = new Audio("/desktop/intro_final.mp3");
     audio.volume = 0.85;
+    audioRef.current = audio;
     let active = true;
     const retryPlayback = () => {
       window.removeEventListener("pointerdown", retryPlayback);
       window.removeEventListener("keydown", retryPlayback);
-      if (active) void audio.play().catch(() => {});
+      if (active) void audio.play().then(() => setAudioBlocked(false)).catch(() => setAudioBlocked(true));
     };
-    audio.play().catch(() => {
+    audio.play().then(() => setAudioBlocked(false)).catch(() => {
       if (!active) return;
+      setAudioBlocked(true);
       window.addEventListener("pointerdown", retryPlayback, { once: true });
       window.addEventListener("keydown", retryPlayback, { once: true });
     });
@@ -31,6 +35,7 @@ export function WelcomeScreen({ onComplete }: { onComplete: () => void }) {
       window.removeEventListener("pointerdown", retryPlayback);
       window.removeEventListener("keydown", retryPlayback);
       audio.pause();
+      if (audioRef.current === audio) audioRef.current = null;
     };
   }, []);
 
@@ -123,6 +128,10 @@ export function WelcomeScreen({ onComplete }: { onComplete: () => void }) {
           {quoteTyped}
           {quoteTyped.length > 0 && !showSpinner && <span className="welcome-quote-caret" />}
         </div>
+        {audioBlocked && <button type="button" className="welcome-sound-button" onClick={() => {
+          const audio = audioRef.current;
+          if (audio) void audio.play().then(() => setAudioBlocked(false)).catch(() => setAudioBlocked(true));
+        }}>Enable sound</button>}
         {showSpinner && (
           <div className="welcome-apple-spinner" aria-label="Loading..." role="status">
             {Array.from({ length: 12 }).map((_, i) => (

@@ -53,6 +53,7 @@ function DesktopMenu({ label, actions }: { label: string; actions: { label: stri
 
 export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> }) {
   const [ready, setReady] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
   const [windows, setWindows] = useState<OpenWindow[]>([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -313,6 +314,10 @@ export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> })
   useEffect(() => {
     function shortcut(event: globalThis.KeyboardEvent) {
       if (!ready) return;
+      if (videoOpen && event.key === "Escape") {
+        setVideoOpen(false);
+        return;
+      }
       if ((event.metaKey || event.ctrlKey) && !event.altKey && !event.isComposing && event.code === "Space") {
         event.preventDefault();
         if (event.repeat) return;
@@ -322,7 +327,7 @@ export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> })
     }
     document.addEventListener("keydown", shortcut);
     return () => document.removeEventListener("keydown", shortcut);
-  }, [searchOpen, ready]);
+  }, [searchOpen, ready, videoOpen]);
 
   function navigateSearch(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "Escape") {
@@ -444,6 +449,7 @@ export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> })
 
       <nav aria-label="Desktop applications" className="desktop-applications" inert={searchOpen}>
         {applications.map(app => <button key={app.id} type="button" className="desktop-application" onDoubleClick={() => openApp(app.id, { toggle: false })} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openApp(app.id, { toggle: false }); } }}><Image src={`/desktop/icons/${app.image}.png`} width={64} height={64} alt="" /><span>{app.label}</span></button>)}
+        <button type="button" className="desktop-application" aria-label="DO_NOT_OPEN video" onDoubleClick={() => setVideoOpen(true)} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setVideoOpen(true); } }}><Image src="/desktop/icons/quicktime.png" width={64} height={64} alt="" /><span>DO_NOT_OPEN</span></button>
       </nav>
 
       {windows.map((current, index) => {
@@ -475,6 +481,8 @@ export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> })
           </div>
         </div>
       </nav>
+
+      {videoOpen && <div className="desktop-video-backdrop" role="presentation" onClick={() => setVideoOpen(false)}><section className="desktop-video-window" role="dialog" aria-modal="true" aria-label="DO_NOT_OPEN video" onClick={event => event.stopPropagation()}><header><strong>DO_NOT_OPEN</strong><button type="button" aria-label="Close video" onClick={() => setVideoOpen(false)}><X size={16} aria-hidden="true" /></button></header><video src="/desktop/videomeme.mp4" autoPlay controls playsInline /></section></div>}
 
       {searchOpen && <div className="spotlight-backdrop" onClick={closeSearch}><section ref={spotlightRef} className="mac-spotlight" role="dialog" aria-modal="true" aria-label="Spotlight" onClick={event => event.stopPropagation()} onKeyDown={navigateSearch}><label className="spotlight-input"><Search size={22} aria-hidden="true" /><input autoFocus value={query} onChange={event => setQuery(event.target.value)} placeholder="Spotlight Search" aria-label="Search applications" /><button type="button" aria-label="Close Spotlight" onClick={closeSearch}><X size={18} aria-hidden="true" /></button></label><div className="spotlight-results">{matches.map(app => <button key={app.id} type="button" onClick={() => openApp(app.id)}><Image src={`/desktop/icons/${app.image}.png`} width={30} height={30} alt="" /><span>{app.label}</span><ArrowUpRight size={14} aria-hidden="true" /></button>)}{!matches.length && <p className="spotlight-empty" role="status">No applications found</p>}</div></section></div>}
       </div>

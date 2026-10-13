@@ -320,6 +320,7 @@
 .welcome-caret { display: inline-block; vertical-align: -.03em; width: 2.5px; height: .82em; margin-left: 6px; background: #ffffffd4; }
 .welcome-quote { min-height: 36px; display: flex; align-items: center; justify-content: center; color: #e2e8f0; font-size: 21px; font-weight: 400; white-space: nowrap; text-shadow: 0 2px 14px #00000066; }
 .welcome-quote-caret { display: inline-block; width: 2px; height: 1.1em; background: #34d399; margin-left: 4px; vertical-align: middle; animation: caret-blink 0.8s step-end infinite; }
+.welcome-sound-button { padding: 7px 12px; border: 1px solid #ffffff66; border-radius: 6px; background: #ffffff1a; color: #fff; cursor: pointer; }
 
 /* Apple-style circular spinner (12 blades) */
 .welcome-apple-spinner { position: relative; width: 18px; height: 18px; margin-top: 0; }
@@ -413,6 +414,12 @@
 .spotlight-results button:hover, .spotlight-results button:focus-visible { background: #006fe815; }
 .spotlight-results button span { flex: 1; text-align: left; }
 .spotlight-empty { padding: 20px; text-align: center; color: var(--mac-muted); font-size: 13px; }
+.desktop-video-backdrop { position: absolute; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: #0009; }
+.desktop-video-window { width: min(900px, 100%); overflow: hidden; border: 1px solid #ffffff55; border-radius: 12px; background: #111; color: #fff; box-shadow: 0 24px 70px #0008; }
+.desktop-video-window header { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 12px; }
+.desktop-video-window header button { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 6px; cursor: pointer; }
+.desktop-video-window header button:hover { background: #ffffff24; }
+.desktop-video-window video { display: block; width: 100%; max-height: calc(100dvh - 110px); background: #000; }
 
 @media (prefers-reduced-motion: no-preference) {
   .mac-desktop[data-ready='true'] .desktop-session { animation: desktop-ready .4s cubic-bezier(.22, 1, .36, 1) both; }

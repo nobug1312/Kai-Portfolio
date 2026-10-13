@@ -144,6 +144,14 @@ test("desktop uses attributed downloaded PNG icons", () => {
   }
 });
 
+test("desktop media assets include the intro sound and DO_NOT_OPEN video", () => {
+  const directory = path.join(root, "public/desktop");
+  const audio = readFileSync(path.join(directory, "intro_final.mp3"));
+  const video = readFileSync(path.join(directory, "videomeme.mp4"));
+  assert.ok(audio.subarray(0, 3).toString() === "ID3" || audio[0] === 0xff, "Invalid intro audio");
+  assert.equal(video.subarray(4, 8).toString(), "ftyp", "Invalid DO_NOT_OPEN video");
+});
+
 test("desktop retains the full-resolution wallpaper with a lightweight mobile variant", () => {
   const directory = path.join(root, "public/desktop");
   const attribution = JSON.parse(readFileSync(path.join(directory, "attribution.json"), "utf8"));
