@@ -87,6 +87,7 @@ export const certificates = [
 type Project = {
   name: string;
   org: string;
+  icon: string;
   kind: string;
   summary: string;
   contribution: string;
@@ -98,6 +99,7 @@ export const projects: Project[] = [
   {
     name: "Structural Fabrication Engine",
     org: "MiTek",
+    icon: "automator",
     kind: "Senior Software Engineer / Team of 5",
     summary: "A manufacturing system that converts structural building models into machine-ready fabrication data for residential and commercial construction across North America.",
     contribution: "Owned member conversion, plate generation and bevel/miter calculations. Redesigned legacy geometry algorithms, led investigations across design, management and manufacturing systems, and improved debugging tools and code quality.",
@@ -107,6 +109,7 @@ export const projects: Project[] = [
   {
     name: "CaptionConnectLive",
     org: "PTN Global Corp",
+    icon: "messages",
     kind: "Software Engineer / Team of 12",
     summary: "A live-session platform delivering translated captions to multilingual audiences.",
     contribution: "Designed the UI, database schema and real-time backend services; integrated secure subscription payments.",
@@ -116,6 +119,7 @@ export const projects: Project[] = [
   {
     name: "Bot App Meeting Assistant",
     org: "PTN Global Corp",
+    icon: "facetime",
     kind: "Software Engineer / Team of 5",
     summary: "A meeting assistant for Webex, Google Meet, Teams and Zoom, with real-time transcription and speaker identification.",
     contribution: "Engineered the transcription and translation pipeline and scalable architecture across meeting platforms.",
@@ -125,6 +129,7 @@ export const projects: Project[] = [
   {
     name: "CCLV3 Desktop App",
     org: "PTN Global Corp",
+    icon: "voice-memos",
     kind: "Software Engineer / Team of 5",
     summary: "An offline desktop app for meeting transcription, translation and session playback.",
     contribution: "Led cross-platform UI design and development in WPF and .NET MAUI, defining recording, transcript review and playback workflows. Integrated offline speech and translation models and optimized large-audio processing.",
@@ -134,6 +139,7 @@ export const projects: Project[] = [
   {
     name: "Oncall Marketplace",
     org: "PTN Global Corp",
+    icon: "quicktime",
     kind: "Software Engineer / Team of 5",
     summary: "A video-localization platform with editable transcripts, multilingual subtitles and export.",
     contribution: "Built responsive editing interfaces, connected microservices through Ocelot, and orchestrated jobs with RabbitMQ and Hangfire.",

@@ -1,0 +1,33 @@
+{
+  "icons": {
+    "author": "Elias",
+    "pack": "MacOS Big Sur",
+    "source": "https://icon-icons.com/pack/macos-big-sur/3053",
+    "license": "Free for commercial use",
+    "licenseUrl": "https://icon-icons.com/licenses/free-commercial",
+    "files": {
+      "profile.png": "https://icon-icons.com/icon/contacts-macos-bigsur/190274",
+      "terminal.png": "https://icon-icons.com/icon/terminal-macos-bigsur/189655",
+      "projects.png": "https://icon-icons.com/icon/finder-macos-bigsur/190173",
+      "stack.png": "https://icon-icons.com/icon/settings-macos-bigsur/189754",
+      "experience.png": "https://icon-icons.com/icon/calendar-macos-bigsur/189482",
+      "mail.png": "https://icon-icons.com/icon/mail-macos-bigsur/190003",
+      "github.png": "https://icon-icons.com/icon/github-macos-bigsur/190140",
+      "automator.png": "https://icon-icons.com/icon/automator-macos-bigsur/190364",
+      "messages.png": "https://icon-icons.com/icon/messages-macos-bigsur/189468",
+      "facetime.png": "https://icon-icons.com/icon/facetime-macos-bigsur/190187",
+      "voice-memos.png": "https://icon-icons.com/icon/voice-memos-macos-bigsur/189568",
+      "quicktime.png": "https://icon-icons.com/icon/quicktime-macos-bigsur/189460"
+    }
+  },
+  "wallpaper": {
+    "name": "Wallhaven 216lzx",
+    "creator": "Unknown",
+    "source": "User-provided local wallpaper",
+    "originalFile": "wallhaven-216lzx_2560x1440.png",
+    "file": "catalina-6k.webp",
+    "mobileFile": "catalina.webp",
+    "changes": "The supplied 2560x1440 image is encoded as a WebP desktop background; a 1280px-wide WebP variant is used on mobile."
+  },
+  "affiliation": "This personal portfolio is not affiliated with Apple or the icon authors. Third-party trademarks belong to their owners."
+}

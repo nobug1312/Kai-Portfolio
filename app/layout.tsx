@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Outfit } from "next/font/google";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
+const desktopFont = Geist({ subsets: ["latin"], variable: "--font-desktop", display: "swap" });
 
 const title = `${site.name} · ${site.role}`;
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description: site.description },
 };
 
-export const viewport: Viewport = { themeColor: "#101314", colorScheme: "dark" };
+export const viewport: Viewport = { themeColor: "#20252a", colorScheme: "light" };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -37,7 +37,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${mono.variable}`}>
+    <html lang="en" className={`${mono.variable} ${desktopFont.variable}`}>
       <body>
         <script
           type="application/ld+json"

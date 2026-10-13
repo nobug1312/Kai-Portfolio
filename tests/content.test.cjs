@@ -118,3 +118,43 @@ test("public icon inventory has no unused SVGs", () => {
   }
   assert.ok(existsSync(path.join(iconDirectory, "devicon/LICENSE.txt")), "Keep the vendored icon license");
 });
+
+test("desktop uses attributed downloaded PNG icons", () => {
+  const directory = path.join(root, "public/desktop");
+  const attribution = JSON.parse(readFileSync(path.join(directory, "attribution.json"), "utf8"));
+  const names = Object.keys(attribution.icons.files).sort();
+  assert.deepEqual(names, ["automator.png", "experience.png", "facetime.png", "github.png", "mail.png", "messages.png", "profile.png", "projects.png", "quicktime.png", "stack.png", "terminal.png", "voice-memos.png"]);
+  assert.equal(new URL(attribution.icons.source).hostname, "icon-icons.com");
+  assert.ok(attribution.icons.author && attribution.icons.license && attribution.icons.licenseUrl);
+  assert.deepEqual(readdirSync(path.join(directory, "icons")).filter(name => name.endsWith(".png")).sort(), names);
+
+  for (const name of names) {
+    assert.equal(new URL(attribution.icons.files[name]).hostname, "icon-icons.com");
+    const image = readFileSync(path.join(directory, "icons", name));
+    assert.equal(image.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `Invalid PNG: ${name}`);
+    assert.equal(image.readUInt32BE(16), 512, `Wrong width: ${name}`);
+    assert.equal(image.readUInt32BE(20), 512, `Wrong height: ${name}`);
+    assert.ok(image.length < 200_000, `Icon too large: ${name}`);
+  }
+
+  const projects = loadContent().projects;
+  assert.equal(new Set(projects.map(project => project.icon)).size, projects.length, "Give each project a distinct icon");
+  for (const project of projects) {
+    assert.ok(attribution.icons.files[`${project.icon}.png`], `Missing icon attribution for ${project.name}`);
+  }
+});
+
+test("desktop retains the full-resolution wallpaper with a lightweight mobile variant", () => {
+  const directory = path.join(root, "public/desktop");
+  const attribution = JSON.parse(readFileSync(path.join(directory, "attribution.json"), "utf8"));
+  assert.equal(attribution.wallpaper.file, "catalina-6k.webp");
+  assert.equal(attribution.wallpaper.mobileFile, "catalina.webp");
+  for (const [file, limit] of [[attribution.wallpaper.file, 4_000_000], [attribution.wallpaper.mobileFile, 300_000]]) {
+    const image = readFileSync(path.join(directory, file));
+    assert.equal(image.subarray(0, 4).toString(), "RIFF");
+    assert.equal(image.subarray(8, 12).toString(), "WEBP");
+    assert.ok(image.length < limit, `Wallpaper exceeds its transfer budget: ${file}`);
+  }
+  assert.equal(attribution.wallpaper.source, "User-provided local wallpaper");
+  assert.ok(attribution.wallpaper.creator && attribution.wallpaper.changes);
+});
