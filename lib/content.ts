@@ -3,7 +3,7 @@ export const site = {
   role: "Software Engineer",
   specialty: "System Design / Technical Leadership",
   location: "Ho Chi Minh City, Vietnam",
-  email: "khaile261@gmail.com",
+  email: "khaile2611@gmail.com",
   github: "https://github.com/nobug1312",
   linkedin: "https://www.linkedin.com/in/le-kai",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? (
