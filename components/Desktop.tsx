@@ -430,8 +430,12 @@ export function Desktop({ panels }: { panels: Record<DesktopAppId, ReactNode> })
   }
 
   return (
-    <main id="main" ref={desktopRef} tabIndex={-1} className="mac-desktop" data-ready={ready}>
+    <main id="main" ref={desktopRef} tabIndex={-1} className="mac-desktop" data-ready={ready} data-maximized={activeWindow?.maximized ?? false}>
       <div className="desktop-session" inert={!ready} aria-hidden={!ready || undefined}>
+      {activeWindow?.maximized && <>
+        <div className="mac-chrome-reveal mac-chrome-reveal-top" aria-hidden="true" />
+        <div className="mac-chrome-reveal mac-chrome-reveal-bottom" aria-hidden="true" />
+      </>}
       <header className="mac-menubar" inert={searchOpen}>        <div className="mac-menu-left">
           <button type="button" className="mac-logo" onClick={() => openApp("profile")} aria-label="About Kai Le" title="About Kai Le"><Image src="/icons/devicon/apple.svg" alt="" width={16} height={18} /></button>
           <span className="mac-menu-app">{applications.find(app => app.id === active)?.label ?? "Finder"}</span>

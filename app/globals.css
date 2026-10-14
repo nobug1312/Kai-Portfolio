@@ -319,30 +319,11 @@
 .welcome-login-button { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #ffffff70; border-radius: 50%; background: #ffffffeb; color: #202124; cursor: pointer; box-shadow: 0 3px 12px #0003; transition: transform .16s ease, background-color .16s ease; }
 .welcome-login-button:hover, .welcome-login-button:focus-visible { transform: scale(1.06); background: #fff; }
 .welcome-name { position: relative; display: block; font-family: var(--font-mono); font-size: 68px; font-weight: 500; letter-spacing: 0; line-height: 1.15; white-space: pre; text-shadow: 0 4px 30px #0000004d; }
-.welcome-name-measure { opacity: 0; }
-.welcome-typed { position: absolute; inset: 0 auto auto 0; }
 .welcome-caret { display: inline-block; vertical-align: -.03em; width: 2.5px; height: .82em; margin-left: 6px; background: #ffffffd4; }
 .welcome-quote { min-height: 36px; display: flex; align-items: center; justify-content: center; color: #e2e8f0; font-size: 21px; font-weight: 400; white-space: nowrap; text-shadow: 0 2px 14px #00000066; }
 .welcome-quote-caret { display: inline-block; width: 2px; height: 1.1em; background: #34d399; margin-left: 4px; vertical-align: middle; animation: caret-blink 0.8s step-end infinite; }
-
-/* Apple-style circular spinner (12 blades) */
-.welcome-apple-spinner { position: relative; width: 18px; height: 18px; margin-top: 0; }
-.welcome-spinner-blade { position: absolute; left: 46%; top: 0; width: 8%; height: 28%; border-radius: 999px; background: #fff; transform-origin: center 178%; }
-.blade-0 { transform: rotate(0deg); opacity: 0.08; }
-.blade-1 { transform: rotate(30deg); opacity: 0.12; }
-.blade-2 { transform: rotate(60deg); opacity: 0.16; }
-.blade-3 { transform: rotate(90deg); opacity: 0.22; }
-.blade-4 { transform: rotate(120deg); opacity: 0.28; }
-.blade-5 { transform: rotate(150deg); opacity: 0.35; }
-.blade-6 { transform: rotate(180deg); opacity: 0.45; }
-.blade-7 { transform: rotate(210deg); opacity: 0.55; }
-.blade-8 { transform: rotate(240deg); opacity: 0.65; }
-.blade-9 { transform: rotate(270deg); opacity: 0.75; }
-.blade-10 { transform: rotate(300deg); opacity: 0.88; }
-.blade-11 { transform: rotate(330deg); opacity: 1; }
-.welcome-apple-spinner { animation: apple-spinner-spin 1s steps(12, end) infinite; }
-@keyframes apple-spinner-spin { to { transform: rotate(360deg); } }
 .mac-menubar { position: absolute; inset: 0 0 auto; z-index: 1000; display: flex; justify-content: space-between; align-items: center; gap: 12px; height: 28px; padding: 0 12px; background: #151c2b85; backdrop-filter: blur(22px) saturate(150%); border-bottom: 1px solid #ffffff12; box-shadow: inset 0 1px 0 #ffffff0d; font-size: 12px; font-weight: 400; color: #f8f9fb; text-shadow: 0 1px 2px #0003; }
+.mac-chrome-reveal { display: none; }
 .mac-menu-left, .mac-menu-right, .mac-app-menu { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .mac-menu-right { flex-shrink: 0; }
 .mac-menubar button { display: inline-flex; align-items: center; justify-content: center; min-height: 26px; border-radius: 5px; cursor: pointer; }
@@ -376,7 +357,7 @@
 .mac-window:focus-visible { outline: none; }
 .mac-window[data-hiding] { pointer-events: none; }
 .mac-window.is-minimized { display: none; }
-.mac-window.is-maximized { inset: 44px 12px 104px !important; width: auto !important; height: auto !important; max-width: none; max-height: none; }
+.mac-window.is-maximized { inset: 0 !important; width: auto !important; height: auto !important; max-width: none; max-height: none; border-radius: 0; }
 .mac-titlebar { display: grid; grid-template-columns: 84px minmax(0, 1fr) 84px; align-items: center; flex-shrink: 0; min-height: 48px; padding: 0 16px; border-bottom: 1px solid #0000000d; background: #f6f8fa; cursor: grab; touch-action: none; user-select: none; }
 .mac-window[data-dragging='true'] .mac-titlebar { cursor: grabbing; }
 .mac-window-controls { display: flex; gap: 0; align-items: center; }
@@ -407,6 +388,9 @@
 .dock-tooltip::after { content: ''; position: absolute; left: calc(50% - 4px); bottom: -5px; width: 8px; height: 8px; background: #f4f6f9eb; border-right: 1px solid #ffffffa6; border-bottom: 1px solid #ffffffa6; transform: rotate(45deg); }
 .dock-application:focus-visible .dock-tooltip { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
 .dock-divider { align-self: center; width: 1px; height: 26px; margin: 0 3px; background: #00000026; }
+.mac-desktop[data-maximized='true'] .mac-chrome-reveal { position: absolute; z-index: 999; left: 0; right: 0; display: block; pointer-events: auto; }
+.mac-desktop[data-maximized='true'] .mac-chrome-reveal-top { top: 0; height: 8px; }
+.mac-desktop[data-maximized='true'] .mac-chrome-reveal-bottom { bottom: 0; height: 12px; }
 .spotlight-backdrop { position: absolute; inset: 0; z-index: 2000; display: flex; align-items: flex-start; justify-content: center; padding: 15vh 20px 20px; background: #00000020; }
 .mac-spotlight { width: 560px; max-width: 100%; overflow: hidden; border: 1px solid #ffffff9c; border-radius: 16px; background: #f5f5f5e8; color: var(--mac-text); box-shadow: 0 24px 64px #0005; backdrop-filter: blur(32px); }
 .spotlight-input { display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
@@ -430,6 +414,18 @@
   .welcome-caret { animation: caret-blink .8s step-end 2; }
   .dock-application img { transform: translateY(var(--dock-lift, 0px)) scale(var(--dock-scale, 1)); transition: transform .16s cubic-bezier(.22, 1, .36, 1); }
   .mac-spotlight { animation: mac-window-enter .2s ease-out; }
+  .mac-menubar, .mac-dock { transition: transform .28s cubic-bezier(.2, .75, .25, 1), opacity .18s ease-out; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mac-desktop[data-maximized='true'] .mac-menubar { transform: translateY(-110%); opacity: 0; pointer-events: none; }
+  .mac-desktop[data-maximized='true'] .mac-dock { transform: translate(-50%, calc(100% + 20px)); opacity: 0; pointer-events: none; }
+  .mac-desktop[data-maximized='true']:has(.mac-chrome-reveal-top:hover, .mac-menubar:hover, .mac-menubar:focus-within) .mac-menubar { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mac-desktop[data-maximized='true']:has(.mac-chrome-reveal-bottom:hover, .mac-dock:hover, .mac-dock:focus-within) .mac-dock { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mac-menubar, .mac-dock { transition: none; }
 }
 @keyframes mac-window-enter { from { opacity: 0; transform: translate3d(0, 8px, 0) scale(.96); } to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
 @keyframes desktop-ready { from { opacity: 0; } to { opacity: 1; } }
@@ -456,7 +452,7 @@
   .mac-avatar { display: none !important; }
   .desktop-applications { top: 60px; right: 12px; grid-template-columns: repeat(2, 84px); gap: 10px; }
   .desktop-application { width: 84px; }
-  .mac-window, .mac-window.is-maximized { inset: 50px 10px 100px !important; width: auto !important; height: auto !important; max-width: none; max-height: none; }
+  .mac-window, .mac-window.is-maximized { inset: 0 !important; width: auto !important; height: auto !important; max-width: none; max-height: none; }
   .mac-titlebar { grid-template-columns: 76px minmax(0, 1fr) 76px; padding-inline: 12px; }
   .mac-dock { bottom: 10px; }
   .mac-dock-inner { gap: 3px; }
@@ -477,13 +473,14 @@
 .panel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .panel-heading h2 { font-size: 24px; line-height: 1.3; font-weight: 650; }
 .panel-heading > span { color: var(--mac-muted); font-size: 12px; white-space: nowrap; }
+.profile-panel { max-width: 1040px; margin-inline: auto; }
 .profile-heading { display: flex; align-items: center; gap: 20px; }
 .profile-heading > img { flex-shrink: 0; width: 76px; height: 76px; object-fit: contain; }
 .profile-heading h2 { font-size: 34px; line-height: 1.2; font-weight: 650; }
 .profile-role { margin-top: 5px; font-size: 16px; font-weight: 500; }
 .profile-specialty { margin-top: 4px; font-size: 12px; color: var(--mac-muted); }
-.profile-tagline { margin-top: 28px; font-size: 23px; line-height: 1.4; font-weight: 550; }
-.profile-intro { margin-top: 12px; font-size: 14px; color: #50525b; }
+.profile-tagline { max-width: 42ch; margin-top: 28px; font-size: 23px; line-height: 1.4; font-weight: 550; }
+.profile-intro { max-width: 68ch; margin-top: 12px; color: #50525b; font-size: 14px; line-height: 1.65; }
 .profile-facts { display: grid; gap: 12px; margin-top: 26px; padding-block: 22px; border-block: 1px solid #00000012; font-size: 13px; }
 .profile-facts > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; }
 .profile-facts dt { color: var(--mac-muted); }
